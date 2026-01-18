@@ -1,0 +1,7 @@
+AddType application/manifest+json .json
+AddType image/svg+xml .svg
+
+# Cache control
+<FilesMatch "\.(json|svg)$">
+  Header set Cache-Control "public, max-age=3600"
+</FilesMatch>

@@ -4,26 +4,26 @@ const urlsToCache = [
   "/hm-pelatihan/index.html",
   "/hm-pelatihan/manifest.json",
   "/hm-pelatihan/icon-192.svg",
-  "/hm-pelatihan/icon-512.svg"
+  "/hm-pelatihan/icon-512.svg",
 ];
 
-console.log('Service Worker loaded');
+console.log("Service Worker loaded");
 
 // Install event
 self.addEventListener("install", (event) => {
-  console.log('Service Worker installing...');
+  console.log("Service Worker installing...");
   event.waitUntil(
     caches
       .open(CACHE_NAME)
       .then((cache) => {
-        console.log('Caching app files');
+        console.log("Caching app files");
         return cache.addAll(urlsToCache);
       })
       .then(() => {
-        console.log('✅ Cache ready');
+        console.log("✅ Cache ready");
         self.skipWaiting();
       })
-      .catch(err => console.error('Install failed:', err))
+      .catch((err) => console.error("Install failed:", err)),
   );
 });
 

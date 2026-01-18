@@ -1,14 +1,26 @@
 {
   "name": "Form Input HM Pelatihan",
   "short_name": "HM Pelatihan",
-  "description": "Aplikasi web untuk pencatatan data pelatihan HM - Progressive Web App",
-  "start_url": "/hm-pelatihan/",
+  "description": "Aplikasi web untuk pencatatan data pelatihan HM",
+  "start_url": "/hm-pelatihan/index.html",
   "scope": "/hm-pelatihan/",
   "display": "standalone",
   "orientation": "portrait-primary",
+  "dir": "ltr",
+  "lang": "id",
+  "prefer_related_applications": false,
   "theme_color": "#2e687b",
   "background_color": "#ffffff",
-  "categories": ["productivity"],
+  "categories": ["productivity", "business"],
+  "screenshots": [
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "purpose": "any"
+    }
+  ],
   "icons": [
     {
       "src": "icon-192.svg",
@@ -35,18 +47,32 @@
       "purpose": "maskable"
     }
   ],
-  "screenshots": [
+  "shortcuts": [
     {
-      "src": "icon-512.svg",
-      "sizes": "540x720",
-      "type": "image/svg+xml",
-      "form_factor": "narrow"
+      "name": "Input Data",
+      "short_name": "Input",
+      "description": "Buka form input data pelatihan",
+      "url": "/hm-pelatihan/index.html",
+      "icons": [
+        {
+          "src": "icon-192.svg",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
     },
     {
-      "src": "icon-512.svg",
-      "sizes": "1280x720",
-      "type": "image/svg+xml",
-      "form_factor": "wide"
+      "name": "Edit Data",
+      "short_name": "Edit",
+      "description": "Edit data pelatihan yang sudah ada",
+      "url": "/hm-pelatihan/index.html?mode=edit",
+      "icons": [
+        {
+          "src": "icon-192.svg",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
     }
   ]
 }
