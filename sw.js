@@ -1,5 +1,5 @@
-const CACHE_NAME = "hm-pelatihan-v1";
-const urlsToCache = ["/", "/Home.html", "/manifest.json"];
+const CACHE_NAME = "hm-pelatihan-v2";
+const urlsToCache = ["./", "./index.html", "./manifest.json"];
 
 // Install event
 self.addEventListener("install", (event) => {
@@ -59,7 +59,7 @@ self.addEventListener("fetch", (event) => {
       .catch(() => {
         // Fallback to cache if network fails
         return caches.match(event.request).then((response) => {
-          return response || caches.match("/Home.html");
+          return response || caches.match("./index.html");
         });
       }),
   );
