@@ -2,7 +2,7 @@ const CACHE_NAME = "hm-pelatihan-v3";
 const urlsToCache = [
   "/hm-pelatihan/",
   "/hm-pelatihan/index.html",
-  "/hm-pelatihan/manifest.json"
+  "/hm-pelatihan/manifest.json",
 ];
 
 // Install event
