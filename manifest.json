@@ -2,7 +2,7 @@
   "name": "Form Input HM Pelatihan",
   "short_name": "HM Pelatihan",
   "description": "Aplikasi web untuk pencatatan data pelatihan HM",
-  "start_url": "/hm-pelatihan/index.html",
+  "start_url": "/hm-pelatihan/index.html?source=pwa",
   "scope": "/hm-pelatihan/",
   "display": "standalone",
   "orientation": "portrait-primary",
@@ -12,6 +12,32 @@
   "theme_color": "#2e687b",
   "background_color": "#ffffff",
   "categories": ["productivity", "business"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
   "screenshots": [
     {
       "src": "icon-512.svg",
@@ -19,60 +45,6 @@
       "type": "image/svg+xml",
       "form_factor": "narrow",
       "purpose": "any"
-    }
-  ],
-  "icons": [
-    {
-      "src": "icon-192.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-192.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icon-512.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Input Data",
-      "short_name": "Input",
-      "description": "Buka form input data pelatihan",
-      "url": "/hm-pelatihan/index.html",
-      "icons": [
-        {
-          "src": "icon-192.svg",
-          "sizes": "192x192",
-          "type": "image/svg+xml"
-        }
-      ]
-    },
-    {
-      "name": "Edit Data",
-      "short_name": "Edit",
-      "description": "Edit data pelatihan yang sudah ada",
-      "url": "/hm-pelatihan/index.html?mode=edit",
-      "icons": [
-        {
-          "src": "icon-192.svg",
-          "sizes": "192x192",
-          "type": "image/svg+xml"
-        }
-      ]
     }
   ]
 }

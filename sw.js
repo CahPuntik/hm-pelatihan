@@ -1,82 +1,78 @@
-const CACHE_NAME = "hm-pelatihan-v4";
-const urlsToCache = [
+const CACHE_NAME = "hm-pelatihan-v1";
+const OFFLINE_URL = "/hm-pelatihan/index.html";
+
+const ASSETS = [
   "/hm-pelatihan/",
   "/hm-pelatihan/index.html",
   "/hm-pelatihan/manifest.json",
-  "/hm-pelatihan/icon-192.svg",
-  "/hm-pelatihan/icon-512.svg",
+  "/hm-pelatihan/icon-192.png",
+  "/hm-pelatihan/icon-512.png"
 ];
 
-console.log("Service Worker loaded");
+console.log("✅ Service Worker loaded");
 
-// Install event
+// Install event - cache assets
 self.addEventListener("install", (event) => {
-  console.log("Service Worker installing...");
+  console.log("📦 Installing Service Worker...");
+  self.skipWaiting();
   event.waitUntil(
     caches
       .open(CACHE_NAME)
       .then((cache) => {
-        console.log("Caching app files");
-        return cache.addAll(urlsToCache);
+        console.log("💾 Caching assets...");
+        return cache.addAll(ASSETS);
       })
-      .then(() => {
-        console.log("✅ Cache ready");
-        self.skipWaiting();
-      })
-      .catch((err) => console.error("Install failed:", err)),
+      .catch(err => console.error("❌ Cache failed:", err))
   );
 });
 
-// Activate event
+// Activate event - cleanup old caches
 self.addEventListener("activate", (event) => {
+  console.log("🧹 Activating Service Worker...");
   event.waitUntil(
     caches
       .keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cacheName) => {
-            if (cacheName !== CACHE_NAME) {
-              return caches.delete(cacheName);
-            }
+      .then((keys) =>
+        Promise.all(
+          keys.filter((k) => k !== CACHE_NAME).map((k) => {
+            console.log("🗑️ Deleting old cache:", k);
+            return caches.delete(k);
           }),
-        );
+        ),
+      )
+      .then(() => {
+        console.log("✅ Service Worker activated");
+        return self.clients.claim();
       })
-      .then(() => self.clients.claim()),
   );
 });
 
-// Fetch event - Network first, fallback to cache
+// Fetch event - network first, fallback to cache
 self.addEventListener("fetch", (event) => {
   // Skip non-GET requests
-  if (event.request.method !== "GET") {
-    return;
-  }
+  if (event.request.method !== "GET") return;
 
-  // Skip cross-origin requests
-  if (!event.request.url.startsWith(self.location.origin)) {
-    return;
-  }
+  // Skip cross-origin
+  if (!event.request.url.startsWith(self.location.origin)) return;
 
   event.respondWith(
     fetch(event.request)
-      .then((response) => {
-        // Clone the response
-        const clonedResponse = response.clone();
-
+      .then(response => {
         // Cache successful responses
         if (response.status === 200) {
-          caches.open(CACHE_NAME).then((cache) => {
+          const clonedResponse = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, clonedResponse);
           });
         }
-
         return response;
       })
       .catch(() => {
-        // Fallback to cache if network fails
-        return caches.match(event.request).then((response) => {
-          return response || caches.match("/hm-pelatihan/index.html");
-        });
-      }),
+        // Fallback to cache
+        return caches
+          .match(event.request)
+          .then((res) => res || caches.match(OFFLINE_URL))
+          .catch(() => new Response("Offline - File not found", { status: 404 }));
+      })
   );
 });
