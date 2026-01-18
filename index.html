@@ -537,7 +537,7 @@ editSelector.addEventListener('click', (e) => {
 
 /* ================== PWA & SERVICE WORKER ================== */
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(err => {
+  navigator.serviceWorker.register('./sw.js').catch(err => {
     console.log('Service Worker registration failed:', err);
   });
 }
