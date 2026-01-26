@@ -327,10 +327,14 @@
       <input type="text" id="lokasi" name="lokasi" required placeholder="Lokasi Praktek">
       
       <label for="hmAwal">HM Awal</label>
-      <input type="text" id="hmAwal" name="hmAwal" required placeholder="Gunakan tanda koma (,) untuk desimal">
+      <input type="text" id="hmAwal" name="hmAwal"
+        required placeholder="Gunakan tanda koma (,) untuk desimal"
+        oninput="formatKoma(this)">
       
       <label for="hmAkhir">HM Akhir</label>
-      <input type="text" id="hmAkhir" name="hmAkhir" required placeholder="Gunakan tanda koma (,) untuk desimal">
+      <input type="text" id="hmAkhir" name="hmAkhir"
+        required placeholder="Gunakan tanda koma (,) untuk desimal"
+        oninput="formatKoma(this)">
       
       <label for="keterangan">Keterangan</label>
       <input type="text" id="keterangan" name="keterangan" placeholder=" Diisi keterangan saat standby atau ada kendala saat pelatihan">
@@ -352,6 +356,14 @@
   </div>
 
 <script>
+function formatKoma(el) {
+    // Hanya izinkan angka dan koma
+    el.value = el.value
+      .replace(/\./g, ',')        // ubah titik jadi koma
+      .replace(/[^0-9,]/g, '')      // hapus selain angka & koma
+      .replace(/,(?=.*,)/g, '');    // hanya 1 koma
+}
+
 /* ================== GLOBAL ================== */
 const form = document.getElementById('inputForm');
 const submitBtn = document.querySelector('.btn-blue');
