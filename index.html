@@ -329,12 +329,19 @@
       <label for="hmAwal">HM Awal</label>
       <input type="text" id="hmAwal" name="hmAwal"
         required placeholder="Gunakan tanda koma (,) untuk desimal"
-        oninput="formatKoma(this)">
+        oninput="formatKoma(this);hitungTotalHM()">
       
       <label for="hmAkhir">HM Akhir</label>
       <input type="text" id="hmAkhir" name="hmAkhir"
         required placeholder="Gunakan tanda koma (,) untuk desimal"
-        oninput="formatKoma(this)">
+        oninput="formatKoma(this); hitungTotalHM()">
+
+      <label for="totalHM">Total HM</label>
+      <input type="text"
+             id="totalHM"
+             name="totalHM"
+             readonly
+             placeholder="Otomatis Terisi">
       
       <label for="keterangan">Keterangan</label>
       <input type="text" id="keterangan" name="keterangan" placeholder=" Diisi keterangan saat standby atau ada kendala saat pelatihan">
@@ -363,6 +370,27 @@ function formatKoma(el) {
       .replace(/[^0-9,]/g, '')      // hapus selain angka & koma
       .replace(/,(?=.*,)/g, '');    // hanya 1 koma
 }
+ function hitungTotalHM() {
+    const hmAwal = document.getElementById('hmAwal').value.replace(',', '.');
+    const hmAkhir = document.getElementById('hmAkhir').value.replace(',', '.');
+    const totalHMInput = document.getElementById('totalHM');
+  
+    if (hmAwal !== '' && hmAkhir !== '') {
+      const awal = parseFloat(hmAwal);
+      const akhir = parseFloat(hmAkhir);
+  
+      if (!isNaN(awal) && !isNaN(akhir)) {
+        const total = akhir - awal;
+  
+        // tampilkan kembali pakai koma
+        totalHMInput.value = total.toFixed(1).replace('.', ',');
+      } else {
+        totalHMInput.value = '';
+      }
+    } else {
+      totalHMInput.value = '';
+    }
+ }
 
 /* ================== GLOBAL ================== */
 const form = document.getElementById('inputForm');
